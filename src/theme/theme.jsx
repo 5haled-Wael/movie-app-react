@@ -3,28 +3,38 @@ import { createTheme } from "@mui/material";
 const theme = createTheme({
   palette: {
     mode: "dark",
+
     primary: {
-      main: "#ff3d3d",
+      main: "#01B4E4",
     },
+
     secondary: {
-      main: "#ffc107",
+      main: "#90CEA1",
     },
+
     background: {
-      default: "#121212",
-      paper: "#1f1f1f",
+      default: "#0D253F",
+      paper: "#0F2A44",
     },
+
     text: {
-      primary: "#ffffff",
-      secondary: "#bbbbbb",
+      primary: "#FFFFFF",
+      secondary: "#B0BEC5",
     },
   },
 
   typography: {
-    fontFamily: "Oswald, Arial",
-    h6: { fontWeight: 700 },
-    h5: { fontWeight: 500 },
-    body1: { fontWeight: 400 },
-    button: { fontWeight: 500 },
+    fontFamily: `"Oswald", "Arial", sans-serif`,
+    h4: {
+      fontWeight: 700,
+    },
+    h5: {
+      fontWeight: 600,
+    },
+  },
+
+  shape: {
+    borderRadius: 12,
   },
 });
 

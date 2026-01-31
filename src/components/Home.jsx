@@ -18,6 +18,7 @@ import { useLoading } from "../contexts/LoadingContext";
 export default function Home() {
   const { movies, setPage } = useMovies();
   const { loading } = useLoading();
+
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -36,7 +37,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         {/* MAIN LAYOUT */}
         <Box sx={{ marginTop: "20px", flexGrow: 1 }}>
           <Grid container spacing={2}>
