@@ -1,8 +1,5 @@
 import "./App.css";
 
-// GLOBAL RESET
-import CssBaseline from "@mui/material/CssBaseline";
-
 import { ThemeProvider } from "@emotion/react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 
@@ -20,7 +17,6 @@ function App() {
   return (
     <>
       <LoadingProvider>
-        <CssBaseline />
         <GlobalLoader />
         <ThemeProvider theme={theme}>
           <BrowserRouter>
