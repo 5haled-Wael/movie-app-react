@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ backgroundColor: "rgba(0, 0, 0, 0.10)" }}>
         {/* MAIN LAYOUT */}
         <Box sx={{ marginTop: "20px", flexGrow: 1 }}>
           <Grid container spacing={2}>

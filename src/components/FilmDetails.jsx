@@ -1,17 +1,24 @@
 import { Container, Typography } from "@mui/material";
 import Nav from "./Nav";
 
+// COMPONENTS
+import CastSlider from "./CastSlider";
+import Reviews from "./Reviews";
+import SimilerMovies from "./SimilarMovies";
+
 // CUSTOM HOOK
 import useMovie from "../hooks/useMovie";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import StarRating from "./StarRating";
 
 export default function FilmDetailes() {
   const { movieDetails } = useMovie();
-  console.log(movieDetails);
 
   if (movieDetails) {
+    console.log(movieDetails.id);
+
     return (
       <>
         <Nav />
@@ -19,7 +26,8 @@ export default function FilmDetailes() {
         <Box
           sx={{
             position: "relative",
-            height: { xs: "100vh", md: "90vh" },
+            height: { xs: "auto", md: "90vh" },
+            minHeight: { md: "90vh" },
             backgroundImage: `url(https://image.tmdb.org/t/p/w500${movieDetails.backdrop_path})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -28,11 +36,11 @@ export default function FilmDetailes() {
           {/* OVERLAY */}
           <Box
             sx={{
-              position: "absolute",
-              inset: 0,
+              position: { xs: "relative", md: "absolute" },
+              inset: { md: 0 },
               background:
-                "linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0.5))",
-              padding: 4,
+                "linear-gradient(to right, rgb(0, 0, 0), rgba(0, 0, 0, 0.5))",
+              padding: { xs: 2, md: 4 },
               color: "text.primary",
             }}
           >
@@ -44,19 +52,23 @@ export default function FilmDetailes() {
                   src={`https://image.tmdb.org/t/p/w300${movieDetails.poster_path}`}
                   alt={movieDetails.title}
                   sx={{
-                    width: "100%",
+                    width: { xs: 200, md: "100%" },
                     maxWidth: 300,
                     borderRadius: 2,
                     boxShadow: 6,
-                    mx: { xs: "auto", md: 0 },
+                    mx: "auto",
                     display: "block",
                   }}
                 />
               </Grid>
               {/*=== POSTER ====*/}
-
               <Grid size={{ xs: 12, md: 8 }}>
-                <Box display="flex" alignItems="center" gap="10px">
+                <Box
+                  display="flex"
+                  flexDirection={{ xs: "column", md: "row" }}
+                  alignItems={{ xs: "flex-start", md: "center" }}
+                  gap="10px"
+                >
                   <Typography
                     variant="h2"
                     sx={{
@@ -123,45 +135,45 @@ export default function FilmDetailes() {
                   </Typography>
                 </Box>
                 {/*=== OVERVIEW ===*/}
-                {/* RATTING */}
+                {/* RATING */}
                 <Box sx={{ mt: 2 }}>
-                  <Typography variant="h4">Ratting</Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{ fontSize: { xs: "1.2rem", md: "1.5rem" } }}
+                  >
+                    Rating
+                  </Typography>
                   <Typography sx={{ mt: 1 }}>
-                    {movieDetails.vote_average.toFixed(1)} From{" "}
+                    {movieDetails.vote_average.toFixed(1)}/10 From {""}
                     {movieDetails.vote_count} Vote
                   </Typography>
                   {/* STARS */}
-                  <Box sx={{ display: "flex", gap: 0.5, mt: 0.5 }}>
-                    {Array.from({ length: 5 }).map((_, i) => {
-                      const rating = movieDetails.vote_average / 2;
-                      return (
-                        <Box
-                          key={i}
-                          sx={{
-                            width: 16,
-                            height: 16,
-                            backgroundColor:
-                              i < Math.round(rating)
-                                ? "#FFD700"
-                                : "rgba(255,255,255,0.3)",
-                            clipPath:
-                              "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
-                          }}
-                        />
-                      );
-                    })}
+                  <Box sx={{ mt: 1 }}>
+                    <StarRating value={movieDetails.vote_average / 2} />
                   </Box>
                   {/*=== STARS ===*/}
                 </Box>
-                {/*=== RATTING ===*/}
+                {/*=== RATING ===*/}
               </Grid>
             </Grid>
           </Box>
           {/*=== OVERLAY ===*/}
         </Box>
         {/*=== BANNER ===*/}
-
-        <Container maxWidth="lg"></Container>
+        <Container
+          maxWidth="lg"
+          sx={{ backgroundColor: "rgba(0, 0, 0, 0.10)" }}
+        >
+          {/* CAST */}
+          <CastSlider movieId={movieDetails.id} />
+          {/*=== CAST ===*/}
+          {/* REVIEWS */}
+          <Reviews movieId={movieDetails.id} />
+          {/*=== REVIEWS ===*/}
+          {/* SIMILAR MOVIES */}
+          <SimilerMovies movieId={movieDetails.id} />
+          {/*=== SIMILAR MOVIES ===*/}
+        </Container>
       </>
     );
   }

@@ -9,6 +9,8 @@ export default function useMovie() {
   const { setLoading } = useLoading();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const getMovieDetails = async () => {
       setLoading(true);
       try {
