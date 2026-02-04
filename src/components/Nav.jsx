@@ -8,16 +8,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 // MENU IMPORTS
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Fade, TextField } from "@mui/material";
+import { Box, Fade } from "@mui/material";
 
 // ICON IMPORT
 import MovieIcon from "@mui/icons-material/Movie";
 
 // SEARCH BAR IMPORTS
-import Autocomplete from "@mui/material/Autocomplete";
-import SearchIcon from "@mui/icons-material/Search";
+import SearchBar from "./SearchBar";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Nav() {
   // MENU LOGIC
@@ -46,51 +46,39 @@ export default function Nav() {
           >
             <MenuIcon />
           </IconButton>
-          <MovieIcon sx={{ marginRight: "10px" }} />
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            Movie App
-          </Typography>
-
-          {/* SEARCH BAR */}
-          <Autocomplete
-            sx={{
-              width: 300,
-              display: { xs: "none", sm: "block" },
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderRadius: "25px",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#fff",
-                },
-              },
-            }}
-            freeSolo
-            options={[]}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                placeholder="Search Movies..."
-                size="small"
-                InputProps={{
-                  ...params.InputProps,
-                  startAdornment: (
-                    <>
-                      <SearchIcon sx={{ ml: 1 }} />
-                      {params.inputProps.startAdornment}
-                    </>
-                  ),
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            sx={{ width: "100%" }}
+          >
+            <Link
+              to={`/`}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textDecoration: "none",
+              }}
+            >
+              <MovieIcon sx={{ marginRight: "10px", color: "text.primary" }} />
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{
+                  flexGrow: 1,
+                  color: "text.primary",
+                  mr: 1,
                 }}
-              />
-            )}
-          />
-
-          {/* MOBILE */}
-          <SearchIcon sx={{ display: { xs: "block", sm: "none" } }} />
-
-          {/*=== SEARCH BAR ===*/}
+              >
+                Movie App
+              </Typography>
+            </Link>
+            {/* SEARCH BAR */}
+            <SearchBar />
+            {/*=== SEARCH BAR ===*/}
+          </Box>
         </Toolbar>
-
         {/* MENU */}
         <Menu
           id="fade-menu"

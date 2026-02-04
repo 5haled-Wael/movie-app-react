@@ -19,7 +19,13 @@ export default function useMovies() {
           `https://api.themoviedb.org/3/movie/popular?api_key=beb130d8ffb17fca0487925c3cb0be44&language=en-US&page=${page}`,
         );
 
-        setMovies((prev) => [...prev, ...response.data.results]);
+        setMovies((prev) => {
+          const merged = [...prev, ...response.data.results];
+          const uniqueMovies = Array.from(
+            new Map(merged.map((m) => [m.id, m])).values(),
+          );
+          return uniqueMovies;
+        });
       } catch (err) {
         setError(err);
       } finally {
@@ -28,7 +34,7 @@ export default function useMovies() {
     };
 
     fetchMovies();
-  }, [page]);
+  }, [page, setLoading]);
 
   return { movies, error, setPage };
 }

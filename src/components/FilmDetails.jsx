@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import CastSlider from "./CastSlider";
 import Reviews from "./Reviews";
 import SimilerMovies from "./SimilarMovies";
+import Footer from "./Footer";
 
 // CUSTOM HOOK
 import useMovie from "../hooks/useMovie";
@@ -20,7 +21,7 @@ export default function FilmDetailes() {
     console.log(movieDetails.id);
 
     return (
-      <>
+      <Box sx={{ backgroundColor: "rgba(0, 0, 0, 0.10)" }}>
         <Nav />
         {/* BANNER */}
         <Box
@@ -160,10 +161,7 @@ export default function FilmDetailes() {
           {/*=== OVERLAY ===*/}
         </Box>
         {/*=== BANNER ===*/}
-        <Container
-          maxWidth="lg"
-          sx={{ backgroundColor: "rgba(0, 0, 0, 0.10)" }}
-        >
+        <Container maxWidth="lg">
           {/* CAST */}
           <CastSlider movieId={movieDetails.id} />
           {/*=== CAST ===*/}
@@ -174,7 +172,10 @@ export default function FilmDetailes() {
           <SimilerMovies movieId={movieDetails.id} />
           {/*=== SIMILAR MOVIES ===*/}
         </Container>
-      </>
+        {/* FOOTER */}
+        <Footer />
+        {/*=== FOOTER ===*/}
+      </Box>
     );
   }
 }

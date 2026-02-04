@@ -9,11 +9,26 @@ export default function FilmCard({ title, image, id }) {
   };
 
   return (
-    <Card onClick={handleClick} sx={{ cursor: "pointer" }}>
+    <Card
+      onClick={handleClick}
+      sx={{
+        cursor: "pointer",
+        transition: "0.3s",
+        "&:hover": {
+          transform: "scale(1.03)",
+          boxShadow: 6,
+        },
+      }}
+    >
       <img
-        style={{ width: "100%", height: "400px", objectFit: "cover" }}
+        style={{
+          width: "100%",
+          height: "400px",
+          objectFit: "cover",
+          transition: "0.3s",
+        }}
         src={image}
-        alt="Film"
+        alt={title}
       />
       <Typography sx={{ textAlign: "center", m: 1 }}>{title}</Typography>
     </Card>

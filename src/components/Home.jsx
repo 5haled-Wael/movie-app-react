@@ -1,59 +1,47 @@
 import Container from "@mui/material/Container";
-import { useEffect } from "react";
 
 // COMPONENTS IMPORTS
 import FilmCard from "./FilmCard";
 import Nav from "./Nav";
+import Footer from "./Footer";
+import HeroSlider from "./HeroSlider";
 
 // LAYOUT IMPORTS
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import { Button, Typography } from "@mui/material";
 
 // CUSTOM HOOKS IMPORT
 import useMovies from "../hooks/useMovies";
 
 // CONTEXTS IMPORTS
-import { useLoading } from "../contexts/LoadingContext";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const { movies, setPage } = useMovies();
-  const { loading } = useLoading();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 500 &&
-        !loading
-      ) {
-        setPage((prev) => prev + 1);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading, setPage]);
+  const { movies } = useMovies();
+  const top4Movies = movies.slice(0, 4);
 
   return (
-    <>
+    <Box sx={{ backgroundColor: "rgba(0, 0, 0, 0.10)" }}>
       <Nav />
-      <Container maxWidth="lg" sx={{ backgroundColor: "rgba(0, 0, 0, 0.10)" }}>
-        {/* MAIN LAYOUT */}
-        <Box sx={{ marginTop: "20px", flexGrow: 1 }}>
-          <Grid container spacing={2}>
-            {movies.map((movie) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={movie.id}>
-                <FilmCard
-                  title={movie.title}
-                  image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  id={movie.id}
-                />
-              </Grid>
-            ))}
-          </Grid>
+      {/* HERO SECTION */}
+      <HeroSlider movies={top4Movies} />
+      {/*=== HERO SECTION ===*/}
+      <Container maxWidth="lg">
+        <Box sx={{ textAlign: "center", mt: 5 }}>
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Check out popular movies
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            to="/popular"
+          >
+            See All
+          </Button>
         </Box>
-        {/*=== MAIN LAYOUT ===*/}
       </Container>
-    </>
+      <Footer />
+    </Box>
   );
 }
