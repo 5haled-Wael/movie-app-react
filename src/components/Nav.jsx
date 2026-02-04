@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 // MENU IMPORTS
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Box, Fade } from "@mui/material";
+import { Box, Button, Divider, Fade } from "@mui/material";
 
 // ICON IMPORT
 import MovieIcon from "@mui/icons-material/Movie";
@@ -17,9 +17,20 @@ import MovieIcon from "@mui/icons-material/Movie";
 import SearchBar from "./SearchBar";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Nav() {
+  const location = useLocation();
+
+  // NAV ITEMS
+  const navItems = [
+    { title: "Home", path: "/" },
+    { title: "Popular", path: "/popular" },
+    { title: "Trending", path: "/trending" },
+    { title: "Top Rated", path: "/top-rated" },
+    { title: "Upcoming", path: "/upcoming" },
+  ];
+
   // MENU LOGIC
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -35,22 +46,25 @@ export default function Nav() {
     <>
       <AppBar position="static" sx={{ width: "100%" }}>
         <Toolbar>
+          {/* MENU ICON IN MOBILE */}
           <IconButton
             id="fade-button"
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, display: { md: "none" } }}
             onClick={handleClick}
           >
             <MenuIcon />
           </IconButton>
+          {/*=== MENU ICON IN MOBILE ===*/}
           <Box
             display="flex"
             justifyContent="space-between"
             sx={{ width: "100%" }}
           >
+            {/* LOGO */}
             <Link
               to={`/`}
               style={{
@@ -74,6 +88,28 @@ export default function Nav() {
                 Movie App
               </Typography>
             </Link>
+            {/*=== LOGO ===*/}
+            {/* NAVIGATION */}
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3 }}>
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Button
+                    key={item.path}
+                    sx={{
+                      color: isActive ? "secondary.main" : "text.primary",
+                      fontSize: "1rem",
+                      fontWeight: isActive ? "bold" : "normal",
+                    }}
+                    component={Link}
+                    to={item.path}
+                  >
+                    {item.title}
+                  </Button>
+                );
+              })}
+            </Box>
+            {/*=== NAVIGATION ===*/}
             {/* SEARCH BAR */}
             <SearchBar />
             {/*=== SEARCH BAR ===*/}
@@ -92,9 +128,31 @@ export default function Nav() {
           open={open}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Tranding</MenuItem>
-          <MenuItem onClick={handleClose}>Latest</MenuItem>
-          <MenuItem onClick={handleClose}>Films</MenuItem>
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.path;
+
+            return (
+              <MenuItem
+                key={item.path}
+                onClick={handleClose}
+                component={Link}
+                to={item.path}
+                sx={{
+                  color: isActive ? "secondary.main" : "text.primary",
+                  fontWeight: isActive ? "bold" : "normal",
+                  typography: "body1",
+                  px: 3,
+                  py: 1.5,
+                  "&:hover": {
+                    backgroundColor: "primary.light",
+                    color: "primary.contrastText",
+                  },
+                }}
+              >
+                {item.title}
+              </MenuItem>
+            );
+          })}
         </Menu>
         {/*=== MENU ===*/}
       </AppBar>

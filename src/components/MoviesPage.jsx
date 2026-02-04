@@ -13,8 +13,8 @@ import useMovies from "../hooks/useMovies";
 // CUSTOM CONTEXTS
 import { useLoading } from "../contexts/LoadingContext";
 
-export default function PopularMovies() {
-  const { movies, setPage } = useMovies();
+export default function MoviesPage({ category, title }) {
+  const { movies, setPage } = useMovies(category);
   const { loading } = useLoading();
 
   useEffect(() => {
@@ -27,8 +27,8 @@ export default function PopularMovies() {
         setPage((prev) => prev + 1);
       }
     };
-    window.addEventListener("scroll", handleScroll);
 
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [loading, setPage]);
 
@@ -37,7 +37,7 @@ export default function PopularMovies() {
       <Nav />
       <Container maxWidth="lg" sx={{ mt: 3 }}>
         <Typography variant="h4" sx={{ mb: 3, textAlign: "center" }}>
-          Popular Movies
+          {title}
         </Typography>
         <Grid container spacing={2}>
           {movies.map((movie) => (

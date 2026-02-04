@@ -79,7 +79,12 @@ export default function HeroSlider({ movies }) {
                     <Typography
                       variant="h3"
                       color="text.primary"
-                      sx={{ fontWeight: 800, letterSpacing: 1, mb: 1 }}
+                      sx={{
+                        fontWeight: 800,
+                        letterSpacing: 1,
+                        mb: 1,
+                        fontSize: { xs: "1.5rem", md: "3rem" },
+                      }}
                     >
                       {movie.title}
                     </Typography>

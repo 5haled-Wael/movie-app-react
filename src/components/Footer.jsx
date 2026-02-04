@@ -30,7 +30,7 @@ export default function Footer() {
         </Box>
         <Box>
           <Typography variant="caption" sx={{ ml: 1, opacity: 0.8 }}>
-            Data provided by TMDB
+            Data provided by
           </Typography>
           <Link
             href="https://www.themoviedb.org/"

@@ -8,10 +8,10 @@ import Home from "./components/Home";
 import FilmDetailes from "./components/FilmDetails";
 import GlobalLoader from "./components/GlobalLoader";
 import Actor from "./components/Actor";
-import PopularMovies from "./components/PopularMovies";
 
 // CONTEXTS IMPORTS
 import { LoadingProvider } from "./contexts/LoadingContext";
+import MoviesPage from "./components/MoviesPage";
 
 function App() {
   return (
@@ -24,7 +24,39 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/movie/:id" element={<FilmDetailes />} />
               <Route path="/actor/:id" element={<Actor />} />
-              <Route path="/popular" element={<PopularMovies />} />
+              <Route
+                path="/popular"
+                element={
+                  <MoviesPage category="movie/popular" title="Popular Movies" />
+                }
+              />
+              <Route
+                path="/trending"
+                element={
+                  <MoviesPage
+                    category="trending/movie/week"
+                    title="trending Movies"
+                  />
+                }
+              />
+              <Route
+                path="/top-rated"
+                element={
+                  <MoviesPage
+                    category="movie/top_rated"
+                    title="Top Rated Movies"
+                  />
+                }
+              />
+              <Route
+                path="/upcoming"
+                element={
+                  <MoviesPage
+                    category="movie/upcoming"
+                    title="Upcoming Movies"
+                  />
+                }
+              />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

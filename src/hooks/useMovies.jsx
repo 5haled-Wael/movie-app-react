@@ -4,19 +4,26 @@ import { useEffect, useState } from "react";
 
 import { useLoading } from "../contexts/LoadingContext";
 
-export default function useMovies() {
+export default function useMovies(category = "movie/popular") {
   const { setLoading } = useLoading();
 
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
 
+  // RESET MOVIES & PAGE ON CATEGORY CHANGE
+  useEffect(() => {
+    setMovies([]);
+    setPage(1);
+  }, [category]);
+
+  // FETCH MOVIES
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/popular?api_key=beb130d8ffb17fca0487925c3cb0be44&language=en-US&page=${page}`,
+          `https://api.themoviedb.org/3/${category}?api_key=beb130d8ffb17fca0487925c3cb0be44&language=en-US&page=${page}`,
         );
 
         setMovies((prev) => {
@@ -34,7 +41,7 @@ export default function useMovies() {
     };
 
     fetchMovies();
-  }, [page, setLoading]);
+  }, [page, category, setLoading]);
 
   return { movies, error, setPage };
 }
