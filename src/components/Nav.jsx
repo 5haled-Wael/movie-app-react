@@ -12,6 +12,7 @@ import { Box, Button, Divider, Fade } from "@mui/material";
 
 // ICON IMPORT
 import MovieIcon from "@mui/icons-material/Movie";
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
 
 // SEARCH BAR IMPORTS
 import SearchBar from "./SearchBar";
@@ -62,6 +63,7 @@ export default function Nav() {
           <Box
             display="flex"
             justifyContent="space-between"
+            alignItems="center"
             sx={{ width: "100%" }}
           >
             {/* LOGO */}
@@ -113,9 +115,23 @@ export default function Nav() {
             {/* SEARCH BAR */}
             <SearchBar />
             {/*=== SEARCH BAR ===*/}
+            {/* LIBRARY ICON */}
+            <Link to={"/library"}>
+              <BookmarksIcon
+                sx={{
+                  color: "text.primary",
+                  cursor: "pointer",
+                  transition: 0.3,
+                  "&:hover": {
+                    opacity: 0.7,
+                  },
+                }}
+              />
+            </Link>
+            {/*=== LIBRARY ICON ===*/}
           </Box>
         </Toolbar>
-        {/* MENU */}
+        {/* MOBILE MENU */}
         <Menu
           id="fade-menu"
           slotProps={{
@@ -130,7 +146,6 @@ export default function Nav() {
         >
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
-
             return (
               <MenuItem
                 key={item.path}
@@ -154,7 +169,7 @@ export default function Nav() {
             );
           })}
         </Menu>
-        {/*=== MENU ===*/}
+        {/*=== MOBILE MENU ===*/}
       </AppBar>
     </>
   );

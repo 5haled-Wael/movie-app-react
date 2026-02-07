@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import FilmDetailes from "./components/FilmDetails";
 import GlobalLoader from "./components/GlobalLoader";
 import Actor from "./components/Actor";
+import MovieLibrary from "./components/movieLibrary";
 
 // CONTEXTS IMPORTS
 import { LoadingProvider } from "./contexts/LoadingContext";
@@ -57,6 +58,7 @@ function App() {
                   />
                 }
               />
+              <Route path="/library" element={<MovieLibrary />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
