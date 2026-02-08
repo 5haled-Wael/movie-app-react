@@ -1,26 +1,23 @@
 import { Box, Button } from "@mui/material";
+import CustomSnackbar from "./CustomSnackbar ";
+import { useMovieLibrary } from "../contexts/MovieLibraryContext";
+import { useState } from "react";
 
 export default function LibraryActionButtons({ movieDetails }) {
+  const [snackbar, setSnackbar] = useState(false);
+  const [message, setMessage] = useState("");
+  const { addToFavorite, addToWatchlist } = useMovieLibrary();
+
   function handleFavClick() {
-    const sortedFav = JSON.parse(localStorage.getItem("favorite")) || [];
-
-    const isExsist = sortedFav.some((movie) => movie.id === movieDetails.id);
-
-    if (!isExsist) {
-      sortedFav.push(movieDetails);
-      localStorage.setItem("favorite", JSON.stringify(sortedFav));
-    }
+    addToFavorite(movieDetails);
+    setMessage("Movie added to favorite list");
+    setSnackbar(true);
   }
 
   function handleWatchClick() {
-    const sortedWatch = JSON.parse(localStorage.getItem("watchlist")) || [];
-
-    const isExsist = sortedWatch.some((movie) => movie.id === movieDetails.id);
-
-    if (!isExsist) {
-      sortedWatch.push({ ...movieDetails, watched: false });
-      localStorage.setItem("watchlist", JSON.stringify(sortedWatch));
-    }
+    addToWatchlist(movieDetails);
+    setMessage("Movie added to watchlist");
+    setSnackbar(true);
   }
 
   return (
@@ -31,6 +28,11 @@ export default function LibraryActionButtons({ movieDetails }) {
       <Button variant="contained" onClick={handleWatchClick}>
         Add to watchlist
       </Button>
+      <CustomSnackbar
+        open={snackbar}
+        onClose={() => setSnackbar(false)}
+        message={message}
+      />
     </Box>
   );
 }

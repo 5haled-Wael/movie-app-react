@@ -1,7 +1,17 @@
-import { Typography, Card } from "@mui/material";
+import { Typography, Card, Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function FilmCard({ title, image, id }) {
+export default function FilmCard({
+  title,
+  image,
+  id,
+  watched,
+  showToggleWatched,
+  onToggleWatched,
+  removeFromFavorite,
+  type,
+  removeFromWatchlist,
+}) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -31,6 +41,58 @@ export default function FilmCard({ title, image, id }) {
         alt={title}
       />
       <Typography sx={{ textAlign: "center", m: 1 }}>{title}</Typography>
+
+      {showToggleWatched && (
+        <Box
+          sx={{
+            textAlign: "center",
+            mb: 1,
+            display: "flex",
+            gap: 1,
+            alignItems: "center",
+            mr: 1,
+            ml: 1,
+          }}
+        >
+          <Button
+            sx={{ width: "50%", minHeight: 53 }}
+            variant="contained"
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleWatched();
+            }}
+          >
+            {watched ? "Mark as Not Watched" : "Mark as Watched"}
+          </Button>
+          <Button
+            sx={{ width: "50%", minHeight: 53 }}
+            variant="contained"
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              removeFromWatchlist();
+            }}
+          >
+            remove From Watchlist
+          </Button>
+        </Box>
+      )}
+
+      {type === "favorite" && (
+        <Box sx={{ textAlign: "center", mb: 1 }}>
+          <Button
+            variant="contained"
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              removeFromFavorite();
+            }}
+          >
+            Remove From Favorite
+          </Button>
+        </Box>
+      )}
     </Card>
   );
 }

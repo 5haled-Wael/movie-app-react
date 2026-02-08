@@ -8,7 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 // MENU IMPORTS
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Box, Button, Divider, Fade } from "@mui/material";
+import { Box, Button, Fade } from "@mui/material";
 
 // ICON IMPORT
 import MovieIcon from "@mui/icons-material/Movie";

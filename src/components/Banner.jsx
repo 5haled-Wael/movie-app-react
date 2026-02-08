@@ -111,7 +111,7 @@ export default function Banner({ movieDetails }) {
               <Typography variant="h4" fontWeight="400">
                 OverView
               </Typography>
-              <Typography variant="body1" sx={{ mt: 1 }}>
+              <Typography variant="body2" sx={{ mt: 1 }}>
                 {movieDetails.overview}
               </Typography>
             </Box>

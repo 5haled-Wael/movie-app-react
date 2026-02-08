@@ -1,43 +1,38 @@
-import Nav from "./Nav";
-import Footer from "./Footer";
-import { Box, Container, Grid } from "@mui/material";
-
+// MUI IMPORTS
+import { Box, Button, Container, Grid } from "@mui/material";
 // BUTTON IMPORTS
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-import { useEffect, useState } from "react";
-
+// COMPONENTS IMPORTS
+import Nav from "./Nav";
+import Footer from "./Footer";
 import FilmCard from "./FilmCard";
 
+// CONTEXTS IMPORTS
+import { useMovieLibrary } from "../contexts/MovieLibraryContext";
+
 export default function MovieLibrary() {
-  const [moviesType, setMoviesType] = useState("favorite");
-  const [movies, setMovies] = useState([]);
-  const [watchFilter, setWatchFilter] = useState("all");
+  const {
+    movies,
+    type,
+    watchFilter,
+    setType,
+    setWatchFilter,
+    toggleWatched,
+    removeFromFavorite,
+    removeFromWatchlist,
+  } = useMovieLibrary();
 
   function handleChangeType(event, newValue) {
     if (!newValue) return;
-    setMoviesType(newValue);
+    setType(newValue);
   }
 
   function handleWatchChange(event, newValue) {
     if (!newValue) return;
     setWatchFilter(newValue);
   }
-
-  useEffect(() => {
-    const sortedMovies = JSON.parse(localStorage.getItem(moviesType)) || [];
-
-    if (moviesType === "watchlist") {
-      if (watchFilter === "watched") {
-        sortedMovies = sortedMovies.filter((movie) => movie.watched);
-      } else if (watchFilter === "notWatched") {
-        sortedMovies = sortedMovies.filter((movie) => !movie.watched);
-      }
-    }
-
-    setMovies(sortedMovies);
-  }, [moviesType, watchFilter]);
 
   return (
     <Box sx={{ backgroundColor: "rgba(0, 0, 0, 0.10)" }}>
@@ -48,7 +43,7 @@ export default function MovieLibrary() {
             sx={{
               backgroundColor: "primary.main",
             }}
-            value={moviesType}
+            value={type}
             exclusive
             onChange={handleChangeType}
             aria-label="Platform"
@@ -57,9 +52,8 @@ export default function MovieLibrary() {
               value="favorite"
               sx={{
                 backgroundColor:
-                  moviesType === "favorite" ? "primary.main" : "text.primary",
-                color:
-                  moviesType === "favorite" ? "text.primary" : "primary.main",
+                  type === "favorite" ? "primary.main" : "text.primary",
+                color: type === "favorite" ? "text.primary" : "primary.main",
                 "&:hover": {
                   color: "text.primary",
                 },
@@ -71,9 +65,8 @@ export default function MovieLibrary() {
               value="watchlist"
               sx={{
                 backgroundColor:
-                  moviesType === "watchlist" ? "primary.main" : "text.primary",
-                color:
-                  moviesType === "watchlist" ? "text.primary" : "primary.main",
+                  type === "watchlist" ? "primary.main" : "text.primary",
+                color: type === "watchlist" ? "text.primary" : "primary.main",
                 "&:hover": {
                   color: "text.primary",
                 },
@@ -83,7 +76,8 @@ export default function MovieLibrary() {
             </ToggleButton>
           </ToggleButtonGroup>
         </Box>
-        {moviesType === "watchlist" && (
+        {/* WATCH FILTER */}
+        {type === "watchlist" && (
           <Box sx={{ textAlign: "center", mt: 3, mb: 3 }}>
             <ToggleButtonGroup
               sx={{
@@ -143,16 +137,26 @@ export default function MovieLibrary() {
             </ToggleButtonGroup>
           </Box>
         )}
+        {/*=== WATCH FILTER ===*/}
+        {/* MOVIES GRID */}
         <Grid container spacing={2}>
           {movies.map((movie) => (
-            <FilmCard
-              key={movie.id}
-              title={movie.title}
-              image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              id={movie.id}
-            />
+            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={movie.id}>
+              <FilmCard
+                title={movie.title}
+                image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                id={movie.id}
+                watched={movie.watched}
+                showToggleWatched={type === "watchlist"}
+                onToggleWatched={() => toggleWatched(movie.id)}
+                removeFromFavorite={() => removeFromFavorite(movie.id)}
+                type={type}
+                removeFromWatchlist={() => removeFromWatchlist(movie.id)}
+              />
+            </Grid>
           ))}
         </Grid>
+        {/*=== MOVIES GRID ===*/}
       </Container>
       <Footer />
     </Box>
