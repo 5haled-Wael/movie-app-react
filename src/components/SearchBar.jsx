@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import useSearchMovies from "../hooks/useSearchMovies";
+import { Link } from "react-router-dom";
 import {
   Box,
   List,
@@ -10,8 +10,8 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import useSearchMovies from "../hooks/useSearchMovies";
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");

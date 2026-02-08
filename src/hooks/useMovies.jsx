@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
+
 // API IMPORTS
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 import { useLoading } from "../contexts/LoadingContext";
 

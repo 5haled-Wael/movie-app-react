@@ -1,7 +1,7 @@
-import { Box, Button } from "@mui/material";
-import CustomSnackbar from "./CustomSnackbar ";
-import { useMovieLibrary } from "../contexts/MovieLibraryContext";
 import { useState } from "react";
+import { Box, Button } from "@mui/material";
+import CustomSnackbar from "./CustomSnackbar";
+import { useMovieLibrary } from "../contexts/MovieLibraryContext";
 
 export default function LibraryActionButtons({ movieDetails }) {
   const [snackbar, setSnackbar] = useState(false);

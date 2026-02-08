@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 // SWIPER IMPORTS
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -6,8 +8,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { Box, Button, Container, Typography } from "@mui/material";
+
 import StarRating from "./StarRating";
-import { Link } from "react-router-dom";
 
 export default function HeroSlider({ movies }) {
   return (

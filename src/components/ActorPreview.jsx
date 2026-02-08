@@ -1,5 +1,5 @@
-import { Avatar, Box, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Avatar, Box, Grid, Typography } from "@mui/material";
 
 export default function ActorPreview({ title, actors }) {
   if (!actors || actors.length === 0) return null;

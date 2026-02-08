@@ -1,5 +1,5 @@
-import { Box, Typography, Avatar, Button } from "@mui/material";
 import { useState } from "react";
+import { Box, Typography, Avatar, Button } from "@mui/material";
 
 // COMPONENTS
 import StarRating from "./StarRating";

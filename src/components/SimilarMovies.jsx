@@ -1,7 +1,7 @@
-import { Box, Typography } from "@mui/material";
-import useSimilarMovies from "../hooks/useSimilarMovies";
-import StarRating from "./StarRating";
 import { useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+import StarRating from "./StarRating";
+import useSimilarMovies from "../hooks/useSimilarMovies";
 
 export default function SimilerMovies({ movieId }) {
   const navigate = useNavigate();

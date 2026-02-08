@@ -1,6 +1,9 @@
-import Container from "@mui/material/Container";
-import { Box, Grid, Typography } from "@mui/material";
+// REACT IMPORTS
 import { useEffect } from "react";
+
+// MUI IMPORTS
+import { Box, Grid, Typography } from "@mui/material";
+import Container from "@mui/material/Container";
 
 // COMPONENTS
 import FilmCard from "./FilmCard";

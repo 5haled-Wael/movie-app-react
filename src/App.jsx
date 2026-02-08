@@ -1,8 +1,14 @@
 import "./App.css";
-import theme from "./theme/theme";
+
+// REACT IMPORTS
 import { ThemeProvider } from "@emotion/react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
+
+// MUI IMPORTS
 import { GlobalStyles } from "@mui/material";
+
+// THEME IMPORT
+import theme from "./theme/theme";
 
 // COMPONENTS IMPORTS
 import Home from "./components/Home";

@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import Nav from "./Nav";
 
 // COMPONENTS
@@ -17,8 +17,6 @@ export default function FilmDetailes() {
   const { movieDetails } = useMovie();
 
   if (movieDetails) {
-    console.log(movieDetails.id);
-
     return (
       <Box sx={{ backgroundColor: "rgba(0, 0, 0, 0.10)" }}>
         <Nav />

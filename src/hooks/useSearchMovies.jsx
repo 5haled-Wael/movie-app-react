@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useLoading } from "../contexts/LoadingContext";
 import axios from "axios";
+import { useLoading } from "../contexts/LoadingContext";
 
 export default function useSearchMovies(query) {
   const [result, setResult] = useState([]);

@@ -1,3 +1,6 @@
+// REACT IMPORTS
+import { Link } from "react-router-dom";
+
 // LAYOUT IMPORTS
 import Box from "@mui/material/Box";
 import { Button, Typography } from "@mui/material";
@@ -13,9 +16,6 @@ import ActorPreview from "./ActorPreview";
 // CUSTOM HOOKS IMPORT
 import useMovies from "../hooks/useMovies";
 import useTopActors from "../hooks/useTopActors";
-
-// CONTEXTS IMPORTS
-import { Link } from "react-router-dom";
 
 export default function Home() {
   const { topActors } = useTopActors();

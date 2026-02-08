@@ -1,5 +1,5 @@
-import { Box, Avatar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Box, Avatar, Typography } from "@mui/material";
 import useCast from "../hooks/useCast";
 
 export default function CastSlider({ movieId }) {

@@ -1,7 +1,12 @@
-import { useParams, Link } from "react-router-dom";
-import { Box, Typography, Grid, Container } from "@mui/material";
-import useActor from "../hooks/useActor";
+// REACT IMPORTS
 import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
+
+// MUI IMPORTS
+import { Box, Typography, Grid, Container } from "@mui/material";
+
+// CUSTOM HOOKS IMPORTS
+import useActor from "../hooks/useActor";
 
 // COMPONENTS
 import Nav from "./Nav";
