@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
-import LibraryReducer from "../reducers/libraryReducer";
+import LibraryReducer from "../reducers/LibraryReducer";
 
 const initialState = { type: "favorite", watchFilter: "all", movies: [] };
 const MovieLibraryContext = createContext();

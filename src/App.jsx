@@ -15,7 +15,7 @@ import Home from "./components/Home";
 import FilmDetailes from "./components/FilmDetails";
 import GlobalLoader from "./components/GlobalLoader";
 import Actor from "./components/Actor";
-import MovieLibrary from "./components/movieLibrary";
+import MovieLibrary from "./components/MovieLibrary";
 
 // CONTEXTS IMPORTS
 import { LoadingProvider } from "./contexts/LoadingContext";
